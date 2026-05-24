@@ -1,27 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="https://schema.org/WebApplication">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Convert time across global timezones instantly with Timezone Converter">
-    <meta name="keywords" content="timezone converter, time conversion, world clock, timezone calculator">
+    
+    <!-- Primary Meta Tags -->
+    <title>Free Timezone Converter - Convert Time Across Global Timezones Instantly | World Clock</title>
+    <meta name="title" content="Free Timezone Converter - Convert Time Across Global Timezones Instantly | World Clock">
+    <meta name="description" content="Free online timezone converter tool. Convert time between any timezones worldwide instantly. Features live clocks, UTC offset calculator, world time zones, and easy time zone conversion for international meetings and travel planning.">
+    <meta name="keywords" content="timezone converter, time zone converter, world clock, time conversion, UTC converter, timezone calculator, international time zones, time difference calculator, world time zones, GMT converter, EST to PST, timezone tool, global time converter, meeting time converter, travel time zones">
     <meta name="author" content="ParryApplications">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <meta name="rating" content="General">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://timezoneconverter.parryapplications.com/">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <meta name="theme-color" content="#667eea">
+    <link rel="shortcut icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="theme-color" content="#2563EB">
+    <meta name="msapplication-TileColor" content="#2563EB">
     
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Timezone Converter">
-    <meta property="og:description" content="Convert time across global timezones instantly">
+    <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website">
-    <meta property="og:image" content="favicon.svg">
-    <meta property="og:site_name" content="ParryApplications">
+    <meta property="og:url" content="https://timezoneconverter.parryapplications.com/">
+    <meta property="og:title" content="Free Timezone Converter - Convert Time Across Global Timezones Instantly">
+    <meta property="og:description" content="Free online timezone converter tool. Convert time between any timezones worldwide instantly. Features live clocks, UTC offset calculator, and world time zones.">
+    <meta property="og:image" content="https://timezoneconverter.parryapplications.com/favicon.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Timezone Converter">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://timezoneconverter.parryapplications.com/">
+    <meta name="twitter:title" content="Free Timezone Converter - Convert Time Across Global Timezones Instantly">
+    <meta name="twitter:description" content="Free online timezone converter tool. Convert time between any timezones worldwide instantly. Features live clocks, UTC offset calculator, and world time zones.">
+    <meta name="twitter:image" content="https://timezoneconverter.parryapplications.com/favicon.svg">
+    <meta name="twitter:creator" content="@ParryApplications">
     
     <!-- Apple Touch Icon -->
     <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
     
-    <title>Timezone Converter - Convert Time Across Global Timezones</title>
+    <!-- Structured Data - JSON-LD Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Timezone Converter",
+      "alternateName": "World Clock Time Zone Converter",
+      "url": "https://timezoneconverter.parryapplications.com/",
+      "description": "Free online timezone converter tool to convert time between any timezones worldwide. Features live clocks, UTC offset calculator, world time zones, and easy time zone conversion.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Convert time between any global timezones",
+        "Live clock display for source and destination timezones",
+        "UTC offset calculator",
+        "Day difference indicator",
+        "Time difference calculator",
+        "Popular timezone shortcuts",
+        "Dark mode support",
+        "Mobile responsive design",
+        "Copy and share conversion results"
+      ],
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "softwareVersion": "1.0",
+      "author": {
+        "@type": "Organization",
+        "name": "ParryApplications",
+        "url": "https://timezoneconverter.parryapplications.com/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "ParryApplications"
+      },
+      "inLanguage": "en-US",
+      "potentialAction": {
+        "@type": "UseAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://timezoneconverter.parryapplications.com/",
+          "actionPlatform": [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform"
+          ]
+        }
+      }
+    }
+    </script>
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://timezoneconverter.parryapplications.com/"
+      }]
+    }
+    </script>
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -65,10 +156,20 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="main-container">
+    <main class="main-container" role="main">
         <div class="container">
+            <!-- SEO Content Section -->
+            <section class="seo-content-section" style="margin-bottom: 2rem;">
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--primary); text-align: center; margin-bottom: 1rem;">
+                    Free Online Timezone Converter - Convert Time Between Any Timezones
+                </h1>
+                <p style="text-align: center; color: var(--text-secondary); max-width: 800px; margin: 0 auto 1.5rem;">
+                    Instantly convert time between different timezones worldwide with our free timezone converter tool. Perfect for scheduling international meetings, planning travel, coordinating with remote teams, and managing global communications across multiple time zones.
+                </p>
+            </section>
+            
             <!-- Parent Card -->
-            <div class="parent-card">
+            <article class="parent-card" itemscope itemtype="https://schema.org/SoftwareApplication">
                 <!-- Left Card - Source Timezone -->
                 <div class="converter-card left-card">
                     <h5 class="card-header">
@@ -246,11 +347,73 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- SEO Information Section -->
+            <section class="seo-info-section" style="margin-top: 3rem; padding: 2rem; background: var(--card-bg); border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+                <h2 style="font-size: 1.75rem; font-weight: 600; color: var(--primary); margin-bottom: 1.5rem; text-align: center;">
+                    About Our Timezone Converter Tool
+                </h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">
+                            <i class="fas fa-clock me-2" style="color: var(--primary);"></i>What is a Timezone Converter?
+                        </h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6;">
+                            A timezone converter is an essential tool that helps you convert time between different time zones around the world. Our free online timezone converter makes it easy to schedule international meetings, plan travel itineraries, and coordinate with teams across multiple time zones. Simply select your source timezone and destination timezone to get instant, accurate time conversions.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">
+                            <i class="fas fa-globe me-2" style="color: var(--primary);"></i>Key Features
+                        </h3>
+                        <ul style="color: var(--text-secondary); line-height: 1.8;">
+                            <li><strong>Live Clock Display:</strong> Real-time clocks for both source and destination timezones</li>
+                            <li><strong>UTC Offset Calculator:</strong> View UTC offsets for accurate time zone conversions</li>
+                            <li><strong>Day Difference Indicator:</strong> Know if it's the same day, next day, or previous day</li>
+                            <li><strong>Popular Timezone Shortcuts:</strong> Quick access to UTC, EST, PST, GMT, and JST</li>
+                            <li><strong>Mobile Responsive:</strong> Works perfectly on all devices</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">
+                            <i class="fas fa-users me-2" style="color: var(--primary);"></i>Who Uses Timezone Converters?
+                        </h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6;">
+                            Our timezone converter is perfect for remote workers, international business professionals, travelers, event planners, and anyone coordinating across different time zones. Whether you're scheduling a Zoom meeting between New York and Tokyo, planning a flight from London to Sydney, or managing a global team, our tool provides accurate timezone conversions instantly.
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); margin-top: 2rem;">
+                    <h3 style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">
+                        <i class="fas fa-question-circle me-2" style="color: var(--primary);"></i>How to Use This Timezone Converter
+                    </h3>
+                    <ol style="color: var(--text-secondary); line-height: 1.8; padding-left: 1.5rem;">
+                        <li><strong>Select Source Timezone:</strong> Choose the timezone you're converting from (auto-detected by default)</li>
+                        <li><strong>Pick Date & Time:</strong> Enter the date and time you want to convert</li>
+                        <li><strong>Choose Destination Timezone:</strong> Select the timezone you're converting to</li>
+                        <li><strong>View Results:</strong> Instantly see the converted time with day difference and UTC offset</li>
+                        <li><strong>Copy or Share:</strong> Use the copy or share buttons to save your conversion results</li>
+                    </ol>
+                </div>
+                
+                <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(14, 165, 233, 0.05) 100%); border-radius: var(--radius-md); border-left: 4px solid var(--primary);">
+                    <h3 style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">
+                        <i class="fas fa-lightbulb me-2" style="color: var(--primary);"></i>Common Timezone Conversions
+                    </h3>
+                    <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.5rem;">
+                        Popular timezone conversions include: <strong>EST to PST</strong>, <strong>GMT to IST</strong>, <strong>UTC to local time</strong>, <strong>New York to London</strong>, <strong>Los Angeles to Tokyo</strong>, <strong>Sydney to New York</strong>, and many more. Our converter supports all IANA timezone database entries for comprehensive global coverage.
+                    </p>
+                </div>
+            </section>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <p class="mb-1">
