@@ -1,18 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background Circle with Gradient -->
   <defs>
     <linearGradient id="globeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <circle cx="256" cy="256" r="256" fill="url(#globeGradient)"/>
-  <g transform="translate(256,256)">
-    <path fill="#ffffff" d="M177.1-96c0-17.7-14.3-32-32-32s-32 14.3-32 32V32c0 17.7 14.3 32 32 32s32-14.3 32-32V-96zm-64 192c0-17.7-14.3-32-32-32s-32 14.3-32 32v64c0 17.7 14.3 32 32 32s32-14.3 32-32V96zM-79.8-96c0-17.7-14.3-32-32-32s-32 14.3-32 32V32c0 17.7 14.3 32 32 32s32-14.3 32-32V-96zM-15.8 96c0-17.7-14.3-32-32-32s-32 14.3-32 32v64c0 17.7 14.3 32 32 32s32-14.3 32-32V96zM48.2-96c0-17.7-14.3-32-32-32s-32 14.3-32 32V32c0 17.7 14.3 32 32 32s32-14.3 32-32V-96z"/>
-    <ellipse cx="0" cy="0" rx="180" ry="220" fill="none" stroke="#ffffff" stroke-width="24" opacity="0.6"/>
-    <ellipse cx="0" cy="0" rx="220" ry="180" fill="none" stroke="#ffffff" stroke-width="24" opacity="0.6"/>
-    <circle cx="0" cy="0" r="200" fill="none" stroke="#ffffff" stroke-width="28" opacity="0.8"/>
-    <line x1="-200" y1="0" x2="200" y2="0" stroke="#ffffff" stroke-width="20" opacity="0.5"/>
-    <line x1="-180" y1="-100" x2="180" y2="-100" stroke="#ffffff" stroke-width="16" opacity="0.4"/>
-    <line x1="-180" y1="100" x2="180" y2="100" stroke="#ffffff" stroke-width="16" opacity="0.4"/>
+  
+  <!-- Main Circle Background -->
+  <circle cx="50" cy="50" r="48" fill="url(#globeGradient)"/>
+  
+  <!-- Globe Design -->
+  <g transform="translate(50,50)">
+    <!-- Outer Circle (Globe Border) -->
+    <circle cx="0" cy="0" r="35" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.9"/>
+    
+    <!-- Vertical Meridian Lines -->
+    <ellipse cx="0" cy="0" rx="12" ry="35" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.7"/>
+    <ellipse cx="0" cy="0" rx="24" ry="35" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+    
+    <!-- Horizontal Latitude Lines -->
+    <line x1="-35" y1="0" x2="35" y2="0" stroke="#ffffff" stroke-width="2.5" opacity="0.7"/>
+    <line x1="-30" y1="-17" x2="30" y2="-17" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+    <line x1="-30" y1="17" x2="30" y2="17" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+    
+    <!-- Center Dot -->
+    <circle cx="0" cy="0" r="3" fill="#ffffff" opacity="0.8"/>
   </g>
 </svg>
