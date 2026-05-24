@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert time across global timezones instantly with Timezone Converter">
+    <meta name="keywords" content="timezone converter, time conversion, world clock, timezone calculator">
+    <meta name="author" content="ParryApplications">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.svg">
+    <link rel="mask-icon" href="favicon.svg" color="#667eea">
+    <meta name="theme-color" content="#667eea">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Timezone Converter">
+    <meta property="og:description" content="Convert time across global timezones instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="favicon.svg">
+    <meta property="og:site_name" content="ParryApplications">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="favicon.svg">
+    
+    <title>🌐 Timezone Converter - Convert Time Across Global Timezones</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Google Fonts - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Toast Container for Notifications -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+        <div id="notificationToast" class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMessage"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="fas fa-globe me-2"></i>
+                <div class="brand-text">
+                    <span class="brand-title">Timezone Converter</span>
+                    <small class="brand-subtitle d-none d-md-block">Convert time across global timezones instantly</small>
+                </div>
+            </a>
+            <button class="btn-dark-mode" id="darkModeToggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <div class="container">
+            <!-- Parent Card -->
+            <div class="parent-card">
+                <!-- Left Card - Source Timezone -->
+                <div class="converter-card left-card">
+                    <h5 class="card-header">
+                        <i class="fas fa-map-marker-alt me-2"></i>From Timezone
+                    </h5>
+                    
+                    <!-- Sub Card 1: Timezone Selector -->
+                    <div class="sub-card timezone-selector">
+                        <label for="sourceTimezone" class="form-label">Select Source Timezone</label>
+                        <div class="custom-dropdown" id="sourceTimezoneDropdown">
+                            <div class="dropdown-selected" id="sourceTimezoneSelected">
+                                <span class="selected-text">Select a timezone...</span>
+                                <i class="fas fa-chevron-down dropdown-icon"></i>
+                            </div>
+                            <div class="dropdown-options" id="sourceTimezoneOptions">
+                                <input type="text" class="dropdown-search" placeholder="Search timezone..." id="sourceTimezoneSearch">
+                                <div class="options-list" id="sourceTimezoneList"></div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="sourceTimezone" value="">
+                        <div class="auto-detect-badge mt-2" id="autoDetectBadge">
+                            <i class="fas fa-location-arrow me-1"></i>
+                            <small>Auto-detected: <span id="detectedTimezone">--</span></small>
+                        </div>
+                    </div>
+                    
+                    <!-- Sub Card 2: Date & Time Picker -->
+                    <div class="sub-card datetime-picker">
+                        <label class="form-label">Select Date & Time</label>
+                        <div class="datetime-inputs">
+                            <div class="input-group mb-2">
+                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                <input type="date" 
+                                       class="form-control" 
+                                       id="sourceDate"
+                                       aria-label="Source date">
+                            </div>
+                            <div class="input-group mb-2">
+                                <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                <input type="time" 
+                                       class="form-control" 
+                                       id="sourceTime"
+                                       aria-label="Source time">
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-primary btn-sm w-100 mb-2" id="currentTimeBtn">
+                            <i class="fas fa-sync-alt me-1"></i> Set to Current Time
+                        </button>
+                        <div class="datetime-info">
+                            <div class="info-item">
+                                <i class="fas fa-calendar-day me-1"></i>
+                                <span id="sourceDay">--</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-globe me-1"></i>
+                                <span id="sourceOffset">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Swap Button -->
+                <div class="swap-container">
+                    <button class="btn-swap" id="swapBtn" aria-label="Swap timezones">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                </div>
+
+                <!-- Right Card - Destination Timezone -->
+                <div class="converter-card right-card">
+                    <h5 class="card-header">
+                        <i class="fas fa-map-pin me-2"></i>To Timezone
+                    </h5>
+                    
+                    <!-- Sub Card 1: Timezone Selector -->
+                    <div class="sub-card timezone-selector">
+                        <label for="destTimezone" class="form-label">Select Destination Timezone</label>
+                        <div class="custom-dropdown" id="destTimezoneDropdown">
+                            <div class="dropdown-selected" id="destTimezoneSelected">
+                                <span class="selected-text">Select a timezone...</span>
+                                <i class="fas fa-chevron-down dropdown-icon"></i>
+                            </div>
+                            <div class="dropdown-options" id="destTimezoneOptions">
+                                <input type="text" class="dropdown-search" placeholder="Search timezone..." id="destTimezoneSearch">
+                                <div class="options-list" id="destTimezoneList"></div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="destTimezone" value="">
+                        <div class="popular-shortcuts mt-2">
+                            <small class="text-muted d-block mb-1">Popular:</small>
+                            <div class="shortcut-badges">
+                                <span class="badge shortcut-badge" data-timezone="UTC">UTC</span>
+                                <span class="badge shortcut-badge" data-timezone="America/New_York">EST</span>
+                                <span class="badge shortcut-badge" data-timezone="America/Los_Angeles">PST</span>
+                                <span class="badge shortcut-badge" data-timezone="Asia/Tokyo">JST</span>
+                                <span class="badge shortcut-badge" data-timezone="Europe/London">GMT</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sub Card 2: Result Display -->
+                    <div class="sub-card result-display">
+                        <label class="form-label">Converted Result</label>
+                        <div class="result-content" id="resultContent">
+                            <div class="converted-datetime">
+                                <h3 class="result-time" id="resultTime">--:--</h3>
+                                <p class="result-date" id="resultDate">Select timezones to convert</p>
+                            </div>
+                            <div class="result-info">
+                                <div class="info-item">
+                                    <i class="fas fa-calendar-day me-1"></i>
+                                    <span id="resultDay">--</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-globe me-1"></i>
+                                    <span id="resultOffset">--</span>
+                                </div>
+                            </div>
+                            <div class="day-indicator" id="dayIndicator">
+                                <i class="fas fa-info-circle me-1"></i>
+                                <span id="dayIndicatorText">--</span>
+                            </div>
+                            <div class="time-difference" id="timeDifference">
+                                <i class="fas fa-clock me-1"></i>
+                                <span id="timeDifferenceText">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Bar -->
+            <div class="feature-bar">
+                <div class="feature-buttons">
+                    <button class="btn btn-primary feature-btn" id="copyBtn" disabled>
+                        <i class="fas fa-copy me-1"></i> Copy Result
+                    </button>
+                    <button class="btn btn-primary feature-btn" id="shareBtn" disabled>
+                        <i class="fas fa-share-alt me-1"></i> Share
+                    </button>
+                </div>
+                
+                <!-- Live Clocks -->
+                <div class="live-clocks" id="liveClocks">
+                    <div class="clock-item">
+                        <span class="clock-label">Source:</span>
+                        <span class="clock-time" id="sourceClock">--:--:--</span>
+                    </div>
+                    <div class="clock-divider">|</div>
+                    <div class="clock-item">
+                        <span class="clock-label">Destination:</span>
+                        <span class="clock-time" id="destClock">--:--:--</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favorites Modal -->
+            <div class="modal fade" id="favoritesModal" tabindex="-1" aria-labelledby="favoritesModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="favoritesModalLabel">
+                                <i class="fas fa-star me-2"></i>Favorite Timezone Pairs
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <button class="btn btn-sm btn-success w-100 mb-3" id="addFavoriteBtn">
+                                <i class="fas fa-plus me-1"></i> Add Current Pair to Favorites
+                            </button>
+                            <div id="favoritesList" class="favorites-list">
+                                <p class="text-muted text-center">No favorites saved yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="mb-1">
+                    <i class="fas fa-code me-1"></i>
+                    Built with <i class="fas fa-heart text-danger"></i> by <strong>ParryApplications</strong>
+                </p>
+                <!-- <p class="mb-1">
+                    <i class="fas fa-laptop-code me-1"></i>
+                    HTML, CSS, Bootstrap & JavaScript
+                </p> -->
+                <p class="mb-1">
+                    &copy; <span id="currentYear"></span> ParryApplications. All rights reserved.
+                </p>
+                <!-- <p class="text-muted small mb-0">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Timezone data may vary. Always verify critical time conversions.
+                </p> -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- ARIA Live Region for Screen Readers -->
+    <div aria-live="polite" aria-atomic="true" class="visually-hidden" id="conversionStatus"></div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    
+    <!-- Day.js with Timezone Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.9/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.9/plugin/utc.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.9/plugin/timezone.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>
