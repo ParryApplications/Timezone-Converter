@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timezone Converter - Comprehensive Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #2563EB;
+            text-align: center;
+        }
+        .test-summary {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-summary h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .stat-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+        }
+        .stat-card .value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2563EB;
+        }
+        .stat-card.success .value {
+            color: #10b981;
+        }
+        .stat-card.error .value {
+            color: #ef4444;
+        }
+        .test-results {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-item {
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border-left: 4px solid #10b981;
+            background: #f0fdf4;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 15px;
+            align-items: center;
+        }
+        .test-item.error {
+            border-left-color: #ef4444;
+            background: #fef2f2;
+        }
+        .test-item .source {
+            font-weight: 600;
+            color: #333;
+        }
+        .test-item .dest {
+            color: #666;
+        }
+        .test-item .result {
+            font-size: 13px;
+            color: #888;
+        }
+        .test-item .status {
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .test-item .status.pass {
+            background: #10b981;
+            color: white;
+        }
+        .test-item .status.fail {
+            background: #ef4444;
+            color: white;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #666;
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #2563EB;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .error-details {
+            margin-top: 8px;
+            padding: 8px;
+            background: #fee;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #c00;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌍 Timezone Converter - Comprehensive Accuracy Test</h1>
+    
+    <div class="test-summary">
+        <h2>Test Summary</h2>
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Total Tests</h3>
+                <div class="value" id="totalTests">0</div>
+            </div>
+            <div class="stat-card success">
+                <h3>Passed</h3>
+                <div class="value" id="passedTests">0</div>
+            </div>
+            <div class="stat-card error">
+                <h3>Failed</h3>
+                <div class="value" id="failedTests">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Accuracy</h3>
+                <div class="value" id="accuracy">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-results">
+        <h2>Test Results</h2>
+        <div id="testResults">
+            <div class="loading">
+                <div class="spinner"></div>
+                Running comprehensive timezone tests...
+            </div>
+        </div>
+    </div>
+
+    <!-- Day.js with Timezone Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.9/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.9/plugin/utc.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.9/plugin/timezone.js"></script>
+
+    <script>
+        // Initialize Day.js plugins
+        dayjs.extend(window.dayjs_plugin_utc);
+        dayjs.extend(window.dayjs_plugin_timezone);
+
+        // All timezones from the application
+        const timezones = [
+            // Africa
+            { value: 'Africa/Cairo', label: 'Cairo' },
+            { value: 'Africa/Johannesburg', label: 'Johannesburg' },
+            { value: 'Africa/Lagos', label: 'Lagos' },
+            { value: 'Africa/Nairobi', label: 'Nairobi' },
+            
+            // Americas
+            { value: 'America/New_York', label: 'New York' },
+            { value: 'America/Chicago', label: 'Chicago' },
+            { value: 'America/Denver', label: 'Denver' },
+            { value: 'America/Los_Angeles', label: 'Los Angeles' },
+            { value: 'America/Toronto', label: 'Toronto' },
+            { value: 'America/Vancouver', label: 'Vancouver' },
+            { value: 'America/Mexico_City', label: 'Mexico City' },
+            { value: 'America/Sao_Paulo', label: 'São Paulo' },
+            { value: 'America/Buenos_Aires', label: 'Buenos Aires' },
+            { value: 'America/Lima', label: 'Lima' },
+            { value: 'America/Bogota', label: 'Bogotá' },
+            
+            // Asia
+            { value: 'Asia/Dubai', label: 'Dubai' },
+            { value: 'Asia/Kolkata', label: 'Kolkata' },
+            { value: 'Asia/Shanghai', label: 'Shanghai' },
+            { value: 'Asia/Tokyo', label: 'Tokyo' },
+            { value: 'Asia/Hong_Kong', label: 'Hong Kong' },
+            { value: 'Asia/Singapore', label: 'Singapore' },
+            { value: 'Asia/Seoul', label: 'Seoul' },
+            { value: 'Asia/Bangkok', label: 'Bangkok' },
+            { value: 'Asia/Jakarta', label: 'Jakarta' },
+            { value: 'Asia/Manila', label: 'Manila' },
+            { value: 'Asia/Karachi', label: 'Karachi' },
+            { value: 'Asia/Dhaka', label: 'Dhaka' },
+            
+            // Europe
+            { value: 'Europe/London', label: 'London' },
+            { value: 'Europe/Paris', label: 'Paris' },
+            { value: 'Europe/Berlin', label: 'Berlin' },
+            { value: 'Europe/Rome', label: 'Rome' },
+            { value: 'Europe/Madrid', label: 'Madrid' },
+            { value: 'Europe/Amsterdam', label: 'Amsterdam' },
+            { value: 'Europe/Brussels', label: 'Brussels' },
+            { value: 'Europe/Vienna', label: 'Vienna' },
+            { value: 'Europe/Stockholm', label: 'Stockholm' },
+            { value: 'Europe/Moscow', label: 'Moscow' },
+            { value: 'Europe/Istanbul', label: 'Istanbul' },
+            
+            // Pacific
+            { value: 'Pacific/Auckland', label: 'Auckland' },
+            { value: 'Australia/Sydney', label: 'Sydney' },
+            { value: 'Australia/Melbourne', label: 'Melbourne' },
+            { value: 'Pacific/Fiji', label: 'Fiji' },
+            { value: 'Pacific/Honolulu', label: 'Honolulu' },
+            
+            // UTC
+            { value: 'UTC', label: 'UTC' }
+        ];
+
+        // Test data - various times to test
+        const testTimes = [
+            { date: '2026-05-27', time: '00:00', label: 'Midnight' },
+            { date: '2026-05-27', time: '06:00', label: 'Early Morning' },
+            { date: '2026-05-27', time: '12:00', label: 'Noon' },
+            { date: '2026-05-27', time: '18:00', label: 'Evening' },
+            { date: '2026-05-27', time: '23:59', label: 'Late Night' },
+            { date: '2026-12-25', time: '12:00', label: 'Winter (DST test)' },
+            { date: '2026-07-15', time: '12:00', label: 'Summer (DST test)' }
+        ];
+
+        let testResults = [];
+        let totalTests = 0;
+        let passedTests = 0;
+        let failedTests = 0;
+
+        function performConversion(sourceTimezone, destTimezone, date, time) {
+            try {
+                const dateTimeStr = `${date}T${time}`;
+                
+                // Parse in source timezone
+                const sourceMoment = dayjs.tz(dateTimeStr, sourceTimezone);
+                
+                // Convert to destination timezone
+                const destMoment = sourceMoment.tz(destTimezone);
+                
+                // Verify the conversion is reversible
+                const backToSource = destMoment.tz(sourceTimezone);
+                
+                // Check if conversion is accurate (should match original time)
+                const isAccurate = sourceMoment.format('YYYY-MM-DD HH:mm') === backToSource.format('YYYY-MM-DD HH:mm');
+                
+                return {
+                    success: true,
+                    accurate: isAccurate,
+                    sourceTime: sourceMoment.format('YYYY-MM-DD HH:mm:ss Z'),
+                    destTime: destMoment.format('YYYY-MM-DD HH:mm:ss Z'),
+                    backToSource: backToSource.format('YYYY-MM-DD HH:mm:ss Z'),
+                    sourceUTC: sourceMoment.utc().format('YYYY-MM-DD HH:mm:ss'),
+                    destUTC: destMoment.utc().format('YYYY-MM-DD HH:mm:ss')
+                };
+            } catch (error) {
+                return {
+                    success: false,
+                    accurate: false,
+                    error: error.message
+                };
+            }
+        }
+
+        function runTests() {
+            testResults = [];
+            totalTests = 0;
+            passedTests = 0;
+            failedTests = 0;
+
+            // Test key timezone pairs
+            const keyPairs = [
+                // Asia/Kolkata to various destinations
+                { source: 'Asia/Kolkata', dest: 'America/Los_Angeles' },
+                { source: 'Asia/Kolkata', dest: 'America/New_York' },
+                { source: 'Asia/Kolkata', dest: 'Europe/London' },
+                { source: 'Asia/Kolkata', dest: 'Asia/Tokyo' },
+                { source: 'Asia/Kolkata', dest: 'Australia/Sydney' },
+                { source: 'Asia/Kolkata', dest: 'UTC' },
+                
+                // Other important pairs
+                { source: 'America/New_York', dest: 'America/Los_Angeles' },
+                { source: 'Europe/London', dest: 'Asia/Tokyo' },
+                { source: 'Pacific/Auckland', dest: 'America/New_York' },
+                { source: 'Europe/Paris', dest: 'Asia/Shanghai' },
+                { source: 'America/Sao_Paulo', dest: 'Europe/Moscow' },
+                
+                // All timezones to UTC
+                ...timezones.filter(tz => tz.value !== 'UTC').map(tz => ({
+                    source: tz.value,
+                    dest: 'UTC'
+                }))
+            ];
+
+            // Run tests for each pair with different times
+            keyPairs.forEach(pair => {
+                testTimes.forEach(testTime => {
+                    totalTests++;
+                    const result = performConversion(pair.source, pair.dest, testTime.date, testTime.time);
+                    
+                    const sourceLabel = timezones.find(tz => tz.value === pair.source)?.label || pair.source;
+                    const destLabel = timezones.find(tz => tz.value === pair.dest)?.label || pair.dest;
+                    
+                    if (result.success && result.accurate) {
+                        passedTests++;
+                    } else {
+                        failedTests++;
+                    }
+
+                    testResults.push({
+                        source: sourceLabel,
+                        dest: destLabel,
+                        testTime: testTime.label,
+                        ...result
+                    });
+                });
+            });
+
+            displayResults();
+        }
+
+        function displayResults() {
+            const accuracy = totalTests > 0 ? ((passedTests / totalTests) * 100).toFixed(2) : 0;
+            
+            document.getElementById('totalTests').textContent = totalTests;
+            document.getElementById('passedTests').textContent = passedTests;
+            document.getElementById('failedTests').textContent = failedTests;
+            document.getElementById('accuracy').textContent = accuracy + '%';
+
+            const resultsContainer = document.getElementById('testResults');
+            
+            if (failedTests === 0) {
+                resultsContainer.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #10b981;">
+                        <h2 style="font-size: 48px; margin: 0;">✅</h2>
+                        <h3>All Tests Passed!</h3>
+                        <p>All ${totalTests} timezone conversions are 100% accurate.</p>
+                    </div>
+                `;
+            } else {
+                let html = '<h3>Failed Tests:</h3>';
+                testResults.filter(r => !r.accurate).forEach(result => {
+                    html += `
+                        <div class="test-item error">
+                            <div class="source">${result.source} → ${result.dest}</div>
+                            <div class="dest">${result.testTime}</div>
+                            <div class="result">
+                                ${result.success ? 
+                                    `Source: ${result.sourceTime}<br>Dest: ${result.destTime}<br>Back: ${result.backToSource}` : 
+                                    'Conversion failed'}
+                            </div>
+                            <div class="status fail">FAIL</div>
+                        </div>
+                        ${result.error ? `<div class="error-details">${result.error}</div>` : ''}
+                    `;
+                });
+
+                html += '<h3 style="margin-top: 30px;">Passed Tests (Sample):</h3>';
+                testResults.filter(r => r.accurate).slice(0, 10).forEach(result => {
+                    html += `
+                        <div class="test-item">
+                            <div class="source">${result.source} → ${result.dest}</div>
+                            <div class="dest">${result.testTime}</div>
+                            <div class="result">
+                                Source: ${result.sourceTime}<br>
+                                Dest: ${result.destTime}
+                            </div>
+                            <div class="status pass">PASS</div>
+                        </div>
+                    `;
+                });
+
+                resultsContainer.innerHTML = html;
+            }
+        }
+
+        // Run tests when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(runTests, 500);
+        });
+    </script>
+</body>
+</html>

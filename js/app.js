@@ -67,8 +67,8 @@ const timezones = [
     
     // Pacific
     { value: 'Pacific/Auckland', label: 'Auckland (Pacific/Auckland)' },
-    { value: 'Pacific/Sydney', label: 'Sydney (Pacific/Sydney)' },
-    { value: 'Pacific/Melbourne', label: 'Melbourne (Pacific/Melbourne)' },
+    { value: 'Australia/Sydney', label: 'Sydney (Australia/Sydney)' },
+    { value: 'Australia/Melbourne', label: 'Melbourne (Australia/Melbourne)' },
     { value: 'Pacific/Fiji', label: 'Fiji (Pacific/Fiji)' },
     { value: 'Pacific/Honolulu', label: 'Honolulu (Pacific/Honolulu)' },
     
