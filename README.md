@@ -263,7 +263,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**ParryApplications**
+**[ParryApplications](https://parryapplications.com)**
 
 - Built with ❤️ using HTML, CSS, Bootstrap & JavaScript
 
@@ -291,6 +291,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **[⬆ Back to Top](#-timezone-converter)**
 
-Made with ❤️ by ParryApplications
+Made with ❤️ by [ParryApplications](https://parryapplications.com)
 
 </div>
